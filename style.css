@@ -12,7 +12,6 @@ body {
   line-height: 1.6;
 }
 
-
 /* ===== Cabeçalho ===== */
 header {
   background: #ffffff;
@@ -21,6 +20,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 5%;
+  flex-wrap: wrap;
 }
 
 header .logo {
@@ -30,15 +30,8 @@ header .logo {
 }
 
 .logo img {
-  max-height: 150px; /* tamanho maior que o padrão */
+  max-height: 100px;
   width: auto;
-}
-header .logo img {
-  height: 60px;
-
-  height: 100px !important; /* força aumento */
-  width: auto !important;
-  
 }
 
 header h1 {
@@ -51,6 +44,7 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -77,10 +71,9 @@ h2 {
 
 /* ===== Lista de Produtos ===== */
 .produtos {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
   margin: 30px auto;
   max-width: 1100px;
 }
@@ -92,14 +85,14 @@ h2 {
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   padding: 12px;
-  width: 200px;
-  height: 300px; /* aumentei de 260px para 300px */
+  height: 300px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .produto:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.1);
@@ -107,13 +100,14 @@ h2 {
 
 .produto img {
   max-width: 100%;
-  height: 150px; /* aumentei de 90px para 110px */
+  height: 150px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 6px;
 }
+
 .produto h3 {
-  color: #e0c76d; /* dourado delicado */
+  color: #e0c76d;
   font-size: 1em;
   margin-bottom: 6px;
 }
@@ -128,7 +122,7 @@ h2 {
   display: block;
   margin: 6px 0;
   font-size: 0.95em;
-  color: #c8ad53; /* tom suave */
+  color: #c8ad53;
   font-weight: bold;
 }
 
@@ -203,10 +197,6 @@ footer {
 
 /* ===== Tablet (até 1024px) ===== */
 @media (max-width: 1024px) {
-  .produtos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   nav ul {
     gap: 15px;
     font-size: 0.95rem;
@@ -222,20 +212,23 @@ footer {
   header {
     flex-direction: column;
     text-align: center;
+    padding: 10px;
+  }
+
+  header .logo {
+    flex-direction: column;
+    gap: 5px;
   }
 
   nav ul {
     flex-direction: column;
     gap: 10px;
-    padding: 0;
+    padding: 10px 0;
+    align-items: center;
   }
 
-  .produtos {
-    grid-template-columns: 1fr;
-  }
-
-  .produto {
-    padding: 15px;
+  nav a {
+    font-size: 1rem;
   }
 
   h1, h2 {
@@ -245,23 +238,53 @@ footer {
   button {
     width: 100%;
   }
+
+  /* Carrinho flutuante no mobile */
+  nav ul li:last-child {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e0c76d;
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1100;
+  }
+
+  nav ul li:last-child a {
+    font-size: 1.5rem;
+    color: white;
+  }
 }
 
 /* ===== Celular pequeno (até 480px) ===== */
 @media (max-width: 480px) {
-  header .logo img {
-    max-height: 60px;
+  .produto {
+    height: auto;
+    padding: 10px;
+  }
+
+  .produto img {
+    height: 120px;
+  }
+
+  .produto p {
+    font-size: 0.75em;
+  }
+
+  .produto span {
+    font-size: 0.85em;
+  }
+
+  h1, h2 {
+    font-size: 1.2rem;
   }
 
   nav ul {
     font-size: 0.9rem;
   }
 
-  .produto {
-    padding: 12px;
-  }
-
-  h1, h2 {
-    font-size: 1.2rem;
+  .logo img {
+    max-height: 60px;
   }
 }
